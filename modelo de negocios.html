@@ -1,0 +1,174 @@
+<html><head><base href="https://websim.io/business-model-canvas/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Model Canvas em Português</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+  }
+  .canvas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .section {
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  h2 {
+    margin-top: 0;
+    font-size: 1em;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 5px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  li {
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .add-item {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  #parceiros-chave { grid-area: 1 / 1 / 3 / 2; }
+  #atividades-chave { grid-area: 1 / 2 / 2 / 3; }
+  #recursos-chave { grid-area: 2 / 2 / 3 / 3; }
+  #proposta-valor { grid-area: 1 / 3 / 3 / 4; }
+  #relacionamento-clientes { grid-area: 1 / 4 / 2 / 5; }
+  #canais { grid-area: 2 / 4 / 3 / 5; }
+  #segmentos-clientes { grid-area: 1 / 5 / 3 / 6; }
+  #estrutura-custos { grid-area: 3 / 1 / 4 / 3; }
+  #fontes-receita { grid-area: 3 / 3 / 4 / 6; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div id="parceiros-chave" class="section">
+    <h2>Parceiros Chave</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="atividades-chave" class="section">
+    <h2>Atividades Chave</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="recursos-chave" class="section">
+    <h2>Recursos Chave</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="proposta-valor" class="section">
+    <h2>Proposta de Valor</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="relacionamento-clientes" class="section">
+    <h2>Relacionamento com Clientes</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="canais" class="section">
+    <h2>Canais</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="segmentos-clientes" class="section">
+    <h2>Segmentos de Clientes</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="estrutura-custos" class="section">
+    <h2>Estrutura de Custos</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+  <div id="fontes-receita" class="section">
+    <h2>Fontes de Receita</h2>
+    <ul></ul>
+    <button class="add-item">Adicionar</button>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.add-item').forEach(button => {
+  button.addEventListener('click', function() {
+    const section = this.parentElement;
+    const ul = section.querySelector('ul');
+    const li = document.createElement('li');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Digite aqui...';
+    li.appendChild(input);
+    ul.appendChild(li);
+    input.focus();
+
+    input.addEventListener('blur', function() {
+      if (this.value.trim() !== '') {
+        const text = document.createTextNode(this.value);
+        li.replaceChild(text, this);
+      } else {
+        ul.removeChild(li);
+      }
+    });
+
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        this.blur();
+      }
+    });
+  });
+});
+
+document.querySelectorAll('.section').forEach(section => {
+  section.addEventListener('click', function(e) {
+    if (e.target.tagName === 'LI') {
+      const text = e.target.textContent;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = text;
+      e.target.textContent = '';
+      e.target.appendChild(input);
+      input.focus();
+
+      input.addEventListener('blur', function() {
+        if (this.value.trim() !== '') {
+          e.target.textContent = this.value;
+        } else {
+          e.target.remove();
+        }
+      });
+
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          this.blur();
+        }
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
